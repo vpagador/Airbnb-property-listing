@@ -1,7 +1,7 @@
 import ast
 import pandas as pd
 
-class CleanTabularData:
+class TabularData:
 
     def _set_default_feature_values(self,df:pd.DataFrame) -> pd.DataFrame:
         # columns to fill null values
@@ -51,6 +51,7 @@ class CleanTabularData:
         labels = df[label_column]
         return (features,labels)
 
+
 def read_df(directory:str) -> pd.DataFrame:
         df = pd.read_csv(f'{directory}')
         return df
@@ -66,16 +67,17 @@ if __name__ == "__main__":
     # folder to read from or save to
     listing_directory = 'tabular_data'
 
-    # export a dataset with the index 
+    # read data    
     df = read_df(listing_directory,'listing.csv')
     check_number_of_rows(df)
+    # export a dataset with the index 
     export_df(df,listing_directory,'listing_with_index.csv')
 
     # instatiate the class
-    tabular_data_cleaner = CleanTabularData()
+    tabular_data = TabularData()
 
     # export clean dataset
-    clean_df = tabular_data_cleaner.clean_tabular_data(df)
+    clean_df = tabular_data.clean_tabular_data(df)
     check_number_of_rows(clean_df)
     export_df(clean_df,listing_directory,'clean_tabular_data.csv')
     
